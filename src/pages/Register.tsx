@@ -57,7 +57,7 @@ export function Register() {
             <Card className="max-w-md w-full">
                 <h2 className="text-2xl font-bold text-center text-gray-900">Kayıt Ol</h2>
                 {error && <Alert color="failure">{error}</Alert>}
-                <form className="flex flex-col gap-4" onSubmit={handleSubmit} autoComplete="off">
+                <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                     <div className="flex justify-center mb-4">
                         <div className="flex flex-col items-center">
                             <Label htmlFor="profile-upload" className="mb-2 cursor-pointer">
@@ -97,9 +97,10 @@ export function Register() {
                             </div>
                             <TextInput
                                 id="firstName"
+                                name="firstName"
                                 placeholder="Ahmet"
                                 required
-                                autoComplete="off"
+                                autoComplete="given-name"
                                 value={formData.firstName}
                                 onChange={handleChange}
                             />
@@ -110,9 +111,10 @@ export function Register() {
                             </div>
                             <TextInput
                                 id="lastName"
+                                name="lastName"
                                 placeholder="Yılmaz"
                                 required
-                                autoComplete="off"
+                                autoComplete="family-name"
                                 value={formData.lastName}
                                 onChange={handleChange}
                             />
@@ -125,10 +127,11 @@ export function Register() {
                         </div>
                         <TextInput
                             id="email"
+                            name="email"
                             type="email"
                             placeholder="ahmet@ornek.com"
                             required
-                            autoComplete="none"
+                            autoComplete="username"
                             value={formData.email}
                             onChange={handleChange}
                         />
@@ -140,6 +143,7 @@ export function Register() {
                         </div>
                         <TextInput
                             id="password"
+                            name="password"
                             type="password"
                             required
                             autoComplete="new-password"

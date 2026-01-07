@@ -49,7 +49,7 @@ export function AppNavbar() {
               </>
             )}
             <DropdownDivider />
-            <DropdownItem onClick={logout}>Çıkış Yap</DropdownItem>
+            <DropdownItem onClick={() => { logout(); navigate("/login"); }}>Çıkış Yap</DropdownItem>
           </Dropdown>
         ) : (
           <div className="flex gap-2">

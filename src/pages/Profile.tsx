@@ -36,6 +36,8 @@ export function Profile() {
             const payload: any = { ...formData };
             if (!payload.password || payload.password.trim() === '') {
                 delete payload.password;
+            } else {
+                payload.password = payload.password.trim();
             }
 
             const updatedUser = await authService.updateProfile(user.id, payload);

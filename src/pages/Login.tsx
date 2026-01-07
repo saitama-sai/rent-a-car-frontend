@@ -45,6 +45,8 @@ export function Login() {
               autoComplete="username"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              readOnly
+              onFocus={() => setEmail('')}
             />
           </div>
           <div>

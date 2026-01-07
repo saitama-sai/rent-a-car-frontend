@@ -38,14 +38,14 @@ export function Login() {
             </div>
             <TextInput
               id="email"
-              name="email"
+              name="username"
               type="email"
               placeholder="admin@rentacar.com"
               required
               autoComplete="username"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              readOnly
+              onFocus={() => setEmail('')}
               onFocus={() => setEmail('')}
             />
           </div>

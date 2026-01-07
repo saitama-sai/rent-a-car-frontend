@@ -118,7 +118,7 @@ export function Profile() {
                     </div>
                     <div>
                         <div className="mb-2 block"><Label htmlFor="email">Email</Label></div>
-                        <TextInput id="email" name="email" autoComplete="username" value={formData.email} readOnly />
+                        <TextInput id="email" name="email" autoComplete="email" value={formData.email} readOnly />
                     </div>
                     <div>
                         <div className="mb-2 block"><Label htmlFor="password">Yeni Şifre (İsteğe bağlı)</Label></div>

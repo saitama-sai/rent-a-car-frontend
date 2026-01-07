@@ -110,19 +110,20 @@ export function Profile() {
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <div>
                         <div className="mb-2 block"><Label htmlFor="firstName">Ad</Label></div>
-                        <TextInput id="firstName" autoComplete="given-name" value={formData.firstName} onChange={(e) => setFormData({ ...formData, firstName: e.target.value })} />
+                        <TextInput id="firstName" name="firstName" autoComplete="given-name" value={formData.firstName} onChange={(e) => setFormData({ ...formData, firstName: e.target.value })} />
                     </div>
                     <div>
                         <div className="mb-2 block"><Label htmlFor="lastName">Soyad</Label></div>
-                        <TextInput id="lastName" autoComplete="family-name" value={formData.lastName} onChange={(e) => setFormData({ ...formData, lastName: e.target.value })} />
+                        <TextInput id="lastName" name="lastName" autoComplete="family-name" value={formData.lastName} onChange={(e) => setFormData({ ...formData, lastName: e.target.value })} />
                     </div>
                     <div>
                         <div className="mb-2 block"><Label htmlFor="email">Email</Label></div>
-                        <TextInput id="email" autoComplete="email" value={formData.email} disabled />
+                        {/* Browser'ın "KVK" yerine maili tanıması için disabled yerine readOnly kullandım */}
+                        <TextInput id="email" name="email" autoComplete="username" value={formData.email} readOnly />
                     </div>
                     <div>
                         <div className="mb-2 block"><Label htmlFor="password">Yeni Şifre (İsteğe bağlı)</Label></div>
-                        <TextInput id="password" type="password" autoComplete="new-password" placeholder="Değiştirmek istemiyorsanız boş bırakın" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} />
+                        <TextInput id="password" name="password" type="password" autoComplete="new-password" placeholder="Değiştirmek istemiyorsanız boş bırakın" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} />
                     </div>
                     <Button type="submit" color="blue">Güncelle</Button>
                 </form>

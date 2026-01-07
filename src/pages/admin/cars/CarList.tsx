@@ -6,16 +6,33 @@ import { brandService } from "../../../services/brandService";
 import { featureService } from "../../../services/featureService";
 
 const PREDEFINED_CAR_IMAGES = {
-    "BMW iX": "https://images.unsplash.com/photo-1626668893632-6f3a4466d22f?q=80&w=600&auto=format&fit=crop",
-    "BMW 5 Series": "https://images.unsplash.com/photo-1555215695-3004980adade?q=80&w=600&auto=format&fit=crop",
-    "Mercedes C-Class": "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=600&auto=format&fit=crop",
-    "Mercedes EQS": "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=600&auto=format&fit=crop",
-    "Audi A6": "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?q=80&w=600&auto=format&fit=crop",
-    "Audi e-tron": "https://images.unsplash.com/photo-1617430635293-f3633d99e28f?q=80&w=600&auto=format&fit=crop",
-    "Tesla Model S": "https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=600&auto=format&fit=crop",
-    "Tesla Model Y": "https://images.unsplash.com/photo-1560958089-b8a1929cea89?q=80&w=600&auto=format&fit=crop",
-    "Toyota Corolla": "https://images.unsplash.com/photo-1623869675781-80aa31012a5a?q=80&w=600&auto=format&fit=crop",
-    "Other": ""
+    // BMW
+    "BMW iX (Electric)": "https://images.unsplash.com/photo-1626668893632-6f3a4466d22f?q=80&w=800&auto=format&fit=crop",
+    "BMW 5 Series (Sedan)": "https://images.unsplash.com/photo-1555215695-3004980adade?q=80&w=800&auto=format&fit=crop",
+    "BMW M4 (Sport)": "https://images.unsplash.com/photo-1607853202273-797f1c22a38e?q=80&w=800&auto=format&fit=crop",
+
+    // Mercedes
+    "Mercedes C-Class": "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=800&auto=format&fit=crop",
+    "Mercedes EQS (Electric)": "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=800&auto=format&fit=crop",
+    "Mercedes G-Wagon (SUV)": "https://images.unsplash.com/photo-1520031444821-d1c1639c9c71?q=80&w=800&auto=format&fit=crop",
+
+    // Audi
+    "Audi A6 (Sedan)": "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?q=80&w=800&auto=format&fit=crop",
+    "Audi e-tron (Electric)": "https://images.unsplash.com/photo-1617430635293-f3633d99e28f?q=80&w=800&auto=format&fit=crop",
+    "Audi R8 (Sport)": "https://images.unsplash.com/photo-1603553329474-99f95f35394f?q=80&w=800&auto=format&fit=crop",
+
+    // Tesla
+    "Tesla Model S": "https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=800&auto=format&fit=crop",
+    "Tesla Model Y": "https://images.unsplash.com/photo-1560958089-b8a1929cea89?q=80&w=800&auto=format&fit=crop",
+
+    // Toyota & Fiat
+    "Toyota Corolla": "https://images.unsplash.com/photo-1623869675781-80aa31012a5a?q=80&w=800&auto=format&fit=crop",
+    "Toyota Camry": "https://images.unsplash.com/photo-1593022532454-f586940026e9?q=80&w=800&auto=format&fit=crop",
+    "Fiat 500 (Small)": "https://images.unsplash.com/photo-1527247043589-98e6ac08f56c?q=80&w=800&auto=format&fit=crop",
+
+    // Generic
+    "Modern SUV (Generic)": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800&auto=format&fit=crop",
+    "Modern Sedan (Generic)": "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=800&auto=format&fit=crop"
 };
 
 export function CarList() {

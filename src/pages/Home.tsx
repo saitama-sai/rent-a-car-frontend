@@ -65,8 +65,12 @@ export function Home() {
                     <Card
                         key={car.id}
                         imgAlt={car.model}
-                        imgSrc={car.imageUrl || "https://placehold.co/600x400"}
+                        imgSrc={car.imageUrl || "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=800&auto=format&fit=crop"}
                     >
+                        {/* We can't easily add onError to flowbite Card's internal img via props, 
+                            so we'll use a custom render if needed, but for now let's use a more reliable default.
+                            Actually, flowbite Card renders an img. We might need to override it or use a div bg.
+                            Let's keep it simple and use a high-quality default sedan. */}
                         <div className="flex justify-between items-center mb-2">
                             <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 {car.brand?.name} {car.model}

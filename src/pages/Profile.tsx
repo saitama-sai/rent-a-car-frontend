@@ -31,9 +31,19 @@ export function Profile() {
         e.preventDefault();
         try {
             if (!user) return;
-            const updatedUser = await authService.updateProfile(user.id, formData);
+
+            // Boş şifreyi gönderme (mevcut şifreyi bozmamak için)
+            const payload: any = { ...formData };
+            if (!payload.password || payload.password.trim() === '') {
+                delete payload.password;
+            }
+
+            const updatedUser = await authService.updateProfile(user.id, payload);
             updateUser(updatedUser); // Context ve LocalStorage güncelle
             alert("Profil güncellendi!");
+
+            // Şifre alanını temizle (başarılı güncelleme sonrası)
+            setFormData(prev => ({ ...prev, password: "" }));
         } catch (error: any) {
             alert("Hata: " + error.message);
         }

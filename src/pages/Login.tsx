@@ -37,11 +37,9 @@ export function Login() {
             </div>
             <TextInput
               id="email"
-              name="email"
               type="email"
               placeholder="admin@rentacar.com"
               required
-              autoComplete="username"
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -51,10 +49,8 @@ export function Login() {
             </div>
             <TextInput
               id="password"
-              name="password"
               type="password"
               required
-              autoComplete="current-password"
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>

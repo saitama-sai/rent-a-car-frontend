@@ -40,6 +40,10 @@ export function Profile() {
                 payload.password = payload.password.trim();
             }
 
+            // Email ve id alanlarını güncelleme paketinden çıkar (güvenlik için)
+            delete payload.email;
+            delete payload.id;
+
             const updatedUser = await authService.updateProfile(user.id, payload);
             updateUser(updatedUser); // Context ve LocalStorage güncelle
             alert("Profil güncellendi!");

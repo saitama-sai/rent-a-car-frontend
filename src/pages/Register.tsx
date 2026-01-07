@@ -33,7 +33,6 @@ export function Register() {
         setError("");
 
         try {
-            // FormData hazırla
             const data = new FormData();
             data.append("firstName", formData.firstName);
             data.append("lastName", formData.lastName);
@@ -58,7 +57,7 @@ export function Register() {
             <Card className="max-w-md w-full">
                 <h2 className="text-2xl font-bold text-center text-gray-900">Kayıt Ol</h2>
                 {error && <Alert color="failure">{error}</Alert>}
-                <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+                <form className="flex flex-col gap-4" onSubmit={handleSubmit} autoComplete="off">
                     <div className="flex justify-center mb-4">
                         <div className="flex flex-col items-center">
                             <Label htmlFor="profile-upload" className="mb-2 cursor-pointer">
@@ -100,6 +99,7 @@ export function Register() {
                                 id="firstName"
                                 placeholder="Ahmet"
                                 required
+                                autoComplete="off"
                                 value={formData.firstName}
                                 onChange={handleChange}
                             />
@@ -112,6 +112,7 @@ export function Register() {
                                 id="lastName"
                                 placeholder="Yılmaz"
                                 required
+                                autoComplete="off"
                                 value={formData.lastName}
                                 onChange={handleChange}
                             />
@@ -127,7 +128,7 @@ export function Register() {
                             type="email"
                             placeholder="ahmet@ornek.com"
                             required
-                            autoComplete="off"
+                            autoComplete="none"
                             value={formData.email}
                             onChange={handleChange}
                         />
@@ -141,13 +142,12 @@ export function Register() {
                             id="password"
                             type="password"
                             required
-                            autoComplete="off"
+                            autoComplete="new-password"
                             value={formData.password}
                             onChange={handleChange}
                         />
                     </div>
 
-                    {/* ROL SEÇİMİ (DEMO AMAÇLI BURADA, NORMALDE BACKEND KONTROLÜNDE OLUR) */}
                     <div>
                         <div className="mb-2 block">
                             <Label htmlFor="role">Rol Seçiniz (Demo)</Label>

@@ -30,7 +30,7 @@ export function Login() {
       <Card className="max-w-sm w-full">
         <h2 className="text-2xl font-bold text-center text-gray-900">Giriş Yap</h2>
         {error && <Alert color="failure">{error}</Alert>}
-        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit} autoComplete="off">
           <div>
             <div className="mb-2 block">
               <Label htmlFor="email">Email Adresiniz</Label>
@@ -40,7 +40,7 @@ export function Login() {
               type="email"
               placeholder="admin@rentacar.com"
               required
-              autoComplete="off"
+              autoComplete="none"
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -52,7 +52,7 @@ export function Login() {
               id="password"
               type="password"
               required
-              autoComplete="off"
+              autoComplete="new-password"
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>

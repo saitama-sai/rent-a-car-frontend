@@ -31,7 +31,10 @@ export function Login() {
       <Card className="max-w-sm w-full">
         <h2 className="text-2xl font-bold text-center text-gray-900">Giriş Yap</h2>
         {error && <Alert color="failure">{error}</Alert>}
-        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit} autoComplete="off">
+          {/* Hidden dummy fields to prevent autofill */}
+          <input type="text" name="fakeusername" style={{ display: "none" }} autoComplete="username" />
+          <input type="password" name="fakepassword" style={{ display: "none" }} autoComplete="new-password" />
           <div>
             <div className="mb-2 block">
               <Label htmlFor="email">Email Adresiniz</Label>

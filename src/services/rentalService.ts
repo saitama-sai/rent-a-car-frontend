@@ -15,5 +15,13 @@ export const rentalService = {
     getAll: async () => {
         const response = await api.get<Rental[]>('/rentals');
         return response.data;
+    },
+
+    async update(id: number, data: any): Promise<void> {
+        await api.put(`/rentals/${id}`, data);
+    },
+
+    async delete(id: number): Promise<void> {
+        await api.delete(`/rentals/${id}`);
     }
 };

@@ -32,22 +32,35 @@ export function FeatureList() {
 
     const handleDelete = async (id: number) => {
         if (confirm("Bu özelliği silmek istediğinize emin misiniz?")) {
-            await featureService.delete(id);
-            loadFeatures();
-            setFeatures(features.filter(f => f.id !== id));
+            try {
+                await featureService.delete(id);
+                loadFeatures();
+                setFeatures(features.filter(f => f.id !== id));
+                alert("Özellik başarıyla silindi.");
+            } catch (error: any) {
+                console.error("Silme hatası:", error);
+                alert("Silme işlemi başarısız: " + (error.response?.data?.message || error.message));
+            }
         }
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (editingFeature) {
-            await featureService.update(editingFeature.id, formData.name);
-            setFeatures(features.map(f => f.id === editingFeature.id ? { ...f, name: formData.name } : f));
-        } else {
-            const newFeature = await featureService.create(formData.name);
-            setFeatures([...features, newFeature as Feature]);
+        try {
+            if (editingFeature) {
+                await featureService.update(editingFeature.id, formData.name);
+                setFeatures(features.map(f => f.id === editingFeature.id ? { ...f, name: formData.name } : f));
+                alert("Özellik başarıyla güncellendi!");
+            } else {
+                const newFeature = await featureService.create(formData.name);
+                setFeatures([...features, newFeature as Feature]);
+                alert("Yeni özellik eklendi!");
+            }
+            setOpenModal(false);
+        } catch (error: any) {
+            console.error("Kayıt hatası:", error);
+            alert("İşlem başarısız: " + (error.response?.data?.message || error.message));
         }
-        setOpenModal(false);
     };
 
     return (

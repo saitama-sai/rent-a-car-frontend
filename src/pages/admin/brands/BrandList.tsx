@@ -32,24 +32,35 @@ export function BrandList() {
 
     const handleDelete = async (id: number) => {
         if (confirm("Bu markayı silmek istediğinize emin misiniz?")) {
-            await brandService.delete(id);
-            loadBrands(); // Refresh logic needs real backend, or manual filtering for mock
-            setBrands(brands.filter(b => b.id !== id));
+            try {
+                await brandService.delete(id);
+                loadBrands();
+                setBrands(brands.filter(b => b.id !== id));
+                alert("Marka başarıyla silindi.");
+            } catch (error: any) {
+                console.error("Silme hatası:", error);
+                alert("Silme işlemi başarısız: " + (error.response?.data?.message || error.message));
+            }
         }
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (editingBrand) {
-            await brandService.update(editingBrand.id, formData.name);
-            // Mock update local state
-            setBrands(brands.map(b => b.id === editingBrand.id ? { ...b, name: formData.name } : b));
-        } else {
-            const newBrand = await brandService.create(formData.name);
-            // Mock add local state
-            setBrands([...brands, newBrand as Brand]);
+        try {
+            if (editingBrand) {
+                await brandService.update(editingBrand.id, formData.name);
+                setBrands(brands.map(b => b.id === editingBrand.id ? { ...b, name: formData.name } : b));
+                alert("Marka başarıyla güncellendi!");
+            } else {
+                const newBrand = await brandService.create(formData.name);
+                setBrands([...brands, newBrand as Brand]);
+                alert("Yeni marka eklendi!");
+            }
+            setOpenModal(false);
+        } catch (error: any) {
+            console.error("Kayıt hatası:", error);
+            alert("İşlem başarısız: " + (error.response?.data?.message || error.message));
         }
-        setOpenModal(false);
     };
 
     return (

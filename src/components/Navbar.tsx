@@ -7,6 +7,9 @@ export function AppNavbar() {
   const path = useLocation().pathname;
   const { user, isAuthenticated, logout } = useAuth();
 
+  // Profile resimlerinin prefix'i (localhost veya render)
+  const IMAGE_BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://rent-a-car-backend-6pfm.onrender.com';
+
   return (
     <Navbar fluid rounded border>
       <NavbarBrand href="/">
@@ -22,7 +25,7 @@ export function AppNavbar() {
             label={
               <Avatar
                 alt="User settings"
-                img={user?.profilePictureUrl ? `http://localhost:3000${user.profilePictureUrl}` : undefined}
+                img={user?.profilePictureUrl ? `${IMAGE_BASE_URL}${user.profilePictureUrl}` : undefined}
                 rounded
                 placeholderInitials={user?.firstName?.charAt(0) || user?.email?.charAt(0) || "?"}
               />

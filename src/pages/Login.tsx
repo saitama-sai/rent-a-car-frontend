@@ -40,6 +40,7 @@ export function Login() {
               type="email"
               placeholder="admin@rentacar.com"
               required
+              autoComplete="off"
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -51,6 +52,7 @@ export function Login() {
               id="password"
               type="password"
               required
+              autoComplete="off"
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>

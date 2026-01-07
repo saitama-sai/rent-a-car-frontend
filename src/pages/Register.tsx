@@ -127,6 +127,7 @@ export function Register() {
                             type="email"
                             placeholder="ahmet@ornek.com"
                             required
+                            autoComplete="off"
                             value={formData.email}
                             onChange={handleChange}
                         />
@@ -140,6 +141,7 @@ export function Register() {
                             id="password"
                             type="password"
                             required
+                            autoComplete="off"
                             value={formData.password}
                             onChange={handleChange}
                         />

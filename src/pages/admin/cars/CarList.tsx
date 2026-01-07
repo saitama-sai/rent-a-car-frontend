@@ -6,20 +6,16 @@ import { brandService } from "../../../services/brandService";
 import { featureService } from "../../../services/featureService";
 
 const PREDEFINED_CAR_IMAGES = {
-    // BMW
-    "BMW iX (Electric)": "https://images.unsplash.com/photo-1626668893632-6f3a4466d22f?q=80&w=800&auto=format&fit=crop",
-    "BMW 5 Series (Sedan)": "https://images.unsplash.com/photo-1555215695-3004980adade?q=80&w=800&auto=format&fit=crop",
-    "BMW M4 (Sport)": "https://images.unsplash.com/photo-1607853202273-797f1c22a38e?q=80&w=800&auto=format&fit=crop",
 
-    // Mercedes
-    "Mercedes C-Class": "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=800&auto=format&fit=crop",
-    "Mercedes EQS (Electric)": "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=800&auto=format&fit=crop",
-    "Mercedes G-Wagon (SUV)": "https://images.unsplash.com/photo-1520031444821-d1c1639c9c71?q=80&w=800&auto=format&fit=crop",
+    "DODGE CHARGER": "https://images.unsplash.com/photo-1626668893632-6f3a4466d22f?q=80&w=800&auto=format&fit=crop",
+
+    "BMW M4": "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=800&auto=format&fit=crop",
+    "Mercedes-AMG GT": "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=800&auto=format&fit=crop",
 
     // Audi
     "Audi A6 (Sedan)": "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?q=80&w=800&auto=format&fit=crop",
-    "Audi e-tron (Electric)": "https://images.unsplash.com/photo-1617430635293-f3633d99e28f?q=80&w=800&auto=format&fit=crop",
-    "Audi R8 (Sport)": "https://images.unsplash.com/photo-1603553329474-99f95f35394f?q=80&w=800&auto=format&fit=crop",
+
+    "FORD MUSTANG": "https://images.unsplash.com/photo-1603553329474-99f95f35394f?q=80&w=800&auto=format&fit=crop",
 
     // Tesla
     "Tesla Model S": "https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=800&auto=format&fit=crop",
@@ -27,12 +23,7 @@ const PREDEFINED_CAR_IMAGES = {
 
     // Toyota & Fiat
     "Toyota Corolla": "https://images.unsplash.com/photo-1623869675781-80aa31012a5a?q=80&w=800&auto=format&fit=crop",
-    "Toyota Camry": "https://images.unsplash.com/photo-1593022532454-f586940026e9?q=80&w=800&auto=format&fit=crop",
-    "Fiat 500 (Small)": "https://images.unsplash.com/photo-1527247043589-98e6ac08f56c?q=80&w=800&auto=format&fit=crop",
 
-    // Generic
-    "Modern SUV (Generic)": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800&auto=format&fit=crop",
-    "Modern Sedan (Generic)": "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=800&auto=format&fit=crop"
 };
 
 export function CarList() {
@@ -151,6 +142,18 @@ export function CarList() {
         }
     };
 
+    const handleReturnCar = async (id: number) => {
+        if (confirm("Bu aracın teslim alındığını ve müsait hale getirileceğini onaylıyor musunuz?")) {
+            try {
+                await carService.returnCar(id);
+                alert("Araç başarıyla teslim alındı ve müsait hale getirildi.");
+                loadData();
+            } catch (error: any) {
+                alert("Hata: " + (error.response?.data?.message || error.message));
+            }
+        }
+    };
+
     return (
         <div className="p-4">
             <div className="flex justify-between items-center mb-4">
@@ -196,6 +199,9 @@ export function CarList() {
                                     </div>
                                 </TableCell>
                                 <TableCell className="flex gap-2">
+                                    {!car.available && (
+                                        <Button size="xs" color="success" onClick={() => handleReturnCar(car.id)}>Teslim Et</Button>
+                                    )}
                                     <Button size="xs" color="warning" onClick={() => handleOpenEdit(car)}>Düzenle</Button>
                                     <Button size="xs" color="failure" onClick={() => handleDelete(car.id)}>Sil</Button>
                                 </TableCell>

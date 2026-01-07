@@ -24,5 +24,10 @@ export const carService = {
 
     delete: async (id: number) => {
         await api.delete(`/cars/${id}`);
+    },
+
+    returnCar: async (id: number) => {
+        const response = await api.patch<Car>(`/cars/${id}/return`);
+        return response.data;
     }
 };

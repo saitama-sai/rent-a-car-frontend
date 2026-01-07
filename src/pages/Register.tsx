@@ -131,7 +131,7 @@ export function Register() {
                             type="email"
                             placeholder="ahmet@ornek.com"
                             required
-                            autoComplete="email"
+                            autoComplete="off"
                             value={formData.email}
                             onChange={handleChange}
                         />

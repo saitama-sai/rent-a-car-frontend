@@ -7,7 +7,11 @@ interface ProtectedRouteProps {
 }
 
 export const ProtectedRoute = ({ roles }: ProtectedRouteProps) => {
-    const { user, isAuthenticated } = useAuth();
+    const { user, isAuthenticated, loading } = useAuth();
+
+    if (loading) {
+        return <div className="flex justify-center p-10">Yükleniyor...</div>;
+    }
 
     if (!isAuthenticated) {
         return <Navigate to="/login" replace />;

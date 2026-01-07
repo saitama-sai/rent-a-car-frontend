@@ -1,14 +1,18 @@
 
 import { Button, Navbar, NavbarBrand, NavbarCollapse, NavbarLink, NavbarToggle, Dropdown, Avatar, DropdownHeader, DropdownItem, DropdownDivider } from "flowbite-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 export function AppNavbar() {
-  const path = useLocation().pathname;
-  const { user, isAuthenticated, logout } = useAuth();
+  const location = useLocation();
+  const path = location.pathname;
+  const navigate = useNavigate();
+  const { user, isAuthenticated, logout, loading } = useAuth();
 
   // Profile resimlerinin prefix'i (localhost veya render)
-  const IMAGE_BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://rent-a-car-backend-6pfm.onrender.com';
+  const IMAGE_BASE_URL = window.location.hostname === 'localhost'
+    ? 'http://localhost:3000'
+    : 'https://rent-a-car-backend-6pfm.onrender.com';
 
   return (
     <Navbar fluid rounded border>
@@ -18,7 +22,9 @@ export function AppNavbar() {
         </span>
       </NavbarBrand>
       <div className="flex md:order-2">
-        {isAuthenticated ? (
+        {loading ? (
+          <div className="w-8 h-8 rounded-full bg-gray-200 animate-pulse"></div>
+        ) : isAuthenticated ? (
           <Dropdown
             arrowIcon={false}
             inline
@@ -58,13 +64,25 @@ export function AppNavbar() {
         <NavbarToggle />
       </div>
       <NavbarCollapse>
-        <NavbarLink href="/" active={path === "/"}>
+        <NavbarLink
+          href="/"
+          active={path === "/"}
+          onClick={(e) => { e.preventDefault(); navigate("/"); }}
+        >
           Ana Sayfa
         </NavbarLink>
-        <NavbarLink href="/cars" active={path === "/cars"}>
+        <NavbarLink
+          href="/cars"
+          active={path === "/cars"}
+          onClick={(e) => { e.preventDefault(); navigate("/cars"); }}
+        >
           Arabalar
         </NavbarLink>
-        <NavbarLink href="/about" active={path === "/about"}>
+        <NavbarLink
+          href="/about"
+          active={path === "/about"}
+          onClick={(e) => { e.preventDefault(); navigate("/about"); }}
+        >
           Hakkımızda
         </NavbarLink>
       </NavbarCollapse>

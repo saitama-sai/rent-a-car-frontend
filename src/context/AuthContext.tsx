@@ -6,6 +6,7 @@ import type { User, Role } from '../types';
 interface AuthContextType {
     user: User | null;
     isAuthenticated: boolean;
+    loading: boolean;
     login: (token: string, user: User) => void;
     logout: () => void;
     hasRole: (role: Role) => boolean;
@@ -16,14 +17,32 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Sayfa yenilendiğinde localStorage'dan kullanıcıyı geri yükle
-        const storedUser = localStorage.getItem('user');
-        const token = localStorage.getItem('token');
-        if (storedUser && token) {
-            setUser(JSON.parse(storedUser));
-        }
+        const initAuth = () => {
+            try {
+                const storedUser = localStorage.getItem('user');
+                const token = localStorage.getItem('token');
+                if (storedUser && token) {
+                    const parsed = JSON.parse(storedUser);
+                    if (parsed && typeof parsed === 'object' && parsed.id) {
+                        setUser(parsed);
+                    } else {
+                        localStorage.removeItem('user');
+                        localStorage.removeItem('token');
+                    }
+                }
+            } catch (error) {
+                console.error("Auth initialization error:", error);
+                localStorage.removeItem('user');
+                localStorage.removeItem('token');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        initAuth();
     }, []);
 
     const login = (token: string, userData: User) => {
@@ -48,8 +67,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     };
 
     return (
-        <AuthContext.Provider value={{ user, isAuthenticated: !!user, login, logout, hasRole, updateUser }}>
-            {children}
+        <AuthContext.Provider value={{ user, isAuthenticated: !!user, loading, login, logout, hasRole, updateUser }}>
+            {!loading && children}
         </AuthContext.Provider>
     );
 }

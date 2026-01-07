@@ -12,6 +12,10 @@ export function Profile() {
         password: ""
     });
 
+    const IMAGE_BASE_URL = window.location.hostname === 'localhost'
+        ? 'http://localhost:3000'
+        : 'https://rent-a-car-backend-6pfm.onrender.com';
+
     useEffect(() => {
         if (user) {
             setFormData(prev => ({
@@ -44,7 +48,7 @@ export function Profile() {
                     <div className="w-24 h-24 rounded-full overflow-hidden mb-2 bg-gray-200 flex items-center justify-center">
                         {user?.profilePictureUrl ? (
                             <img
-                                src={`${window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://rent-a-car-backend-6pfm.onrender.com'}${user.profilePictureUrl}`}
+                                src={`${IMAGE_BASE_URL}${user.profilePictureUrl}`}
                                 alt="Profil"
                                 className="w-full h-full object-cover"
                             />
